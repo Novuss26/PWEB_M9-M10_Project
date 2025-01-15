@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Pemesanan Kamar Hotel</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #cb1111, #000000);
+            color: rgb(0, 0, 0);
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin-top: 50px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        .container h3 {
+            font-size: 32px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-label {
+            font-size: 16px;
+        }
+        .form-control, .form-select {
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-shadow: none;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: #2575fc;
+            box-shadow: 0 0 5px rgba(37, 117, 252, 0.7);
+        }
+        .btn-primary {
+            background-color: #000000;
+            border-color: #2575fc;
+            padding: 12px 20px;
+            font-size: 16px;
+            width: 100%;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background-color: #02fd59;
+        }
+        .btn-secondary {
+            background-color: #f70000;
+            border-color: #6c757d;
+            padding: 12px 20px;
+            font-size: 16px;
+            width: 100%;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        .form-check-label {
+            font-size: 14px;
+        }
+        .form-check-input {
+            width: 20px;
+            height: 20px;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h3>Form Pemesanan Kamar Hotel</h3>
+        <form onsubmit="handleSubmit(event)">
+            <div class="mb-3">
+                <label for="idPesanan" class="form-label">Id Pemesanan</label>
+                <input type="text" class="form-control" id="idPesanan" value="1" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="namaPemesan" class="form-label">Nama Pemesan</label>
+                <input type="text" class="form-control" id="namaPemesan" placeholder="Masukkan nama" required>
+            </div>
+            <div class="mb-3">
+                <label for="jenisKelamin" class="form-label">Jenis Kelamin</label>
+                <select class="form-select" id="jenisKelamin" required>
+                    <option value="">--Pilih--</option>
+                    <option value="Laki-Laki">Laki-Laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="nomorIdentitas" class="form-label">Nomor Identitas</label>
+                <input type="text" class="form-control" id="nomorIdentitas" placeholder="Masukkan nomor identitas" required>
+                <div id="errorIdentitas" class="error"></div>
+            </div>
+            <div class="mb-3">
+                <label for="tipeKamar" class="form-label">Tipe Kamar</label>
+                <select class="form-select" id="tipeKamar" onchange="updateHarga()" required>
+                    <option value="">--Pilih--</option>
+                    <option value="800000">STANDARD (Rp 800,000)</option>
+                    <option value="1500000">DELUXE (Rp 1,500,000)</option>
+                    <option value="1000000">FAMILY (Rp 1,000,000)</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="harga" class="form-label">Harga per Malam</label>
+                <input type="text" class="form-control" id="harga" placeholder="Harga per malam" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="tanggalPesan" class="form-label">Tanggal Pesan</label>
+                <input type="date" class="form-control" id="tanggalPesan" required>
+            </div>
+            <div class="mb-3">
+                <label for="durasiMenginap" class="form-label">Durasi Menginap (Hari)</label>
+                <input type="number" class="form-control" id="durasiMenginap" placeholder="Masukkan durasi dalam hari" min="1" onchange="calculateTotal()" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Termasuk Breakfast</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="breakfast" onchange="calculateTotal()">
+                    <label class="form-check-label" for="breakfast">Ya (Tambahan Rp 80,000 per hari)</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="totalBayar" class="form-label">Total Bayar</label>
+                <input type="text" class="form-control" id="totalBayar" placeholder="Total bayar" readonly>
+            </div>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+            <button type="button" class="btn btn-secondary" onclick="goToDashboard()">Batal</button>
+        </form>
+    </div>
+
+    <script>
+        function updateHarga() {
+            const tipeKamar = document.getElementById("tipeKamar").value;
+            document.getElementById("harga").value = tipeKamar ? `Rp ${parseInt(tipeKamar).toLocaleString()}` : '';
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+            const harga = parseInt(document.getElementById("tipeKamar").value) || 0;
+            const durasiMenginap = parseInt(document.getElementById("durasiMenginap").value) || 0;
+            const breakfast = document.getElementById("breakfast").checked;
+            const tambahanBreakfast = breakfast ? 80000 : 0;  // Changed breakfast price to 80,000
+
+            let totalBayar = (harga + tambahanBreakfast) * durasiMenginap;
+
+            // Apply 10% discount if stay is more than 3 days
+            if (durasiMenginap > 3) {
+                totalBayar *= 0.9;  // 10% discount
+            }
+
+            document.getElementById("totalBayar").value = totalBayar > 0 ? `Rp ${totalBayar.toLocaleString()}` : '';
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            // Validate Nomor Identitas
+            const nomorIdentitas = document.getElementById("nomorIdentitas").value;
+            const errorIdentitas = document.getElementById("errorIdentitas");
+            if (nomorIdentitas.length !== 16 || isNaN(nomorIdentitas)) {
+                errorIdentitas.textContent = "Isian salah, harus 16 digit";
+                return;
+            } else {
+                errorIdentitas.textContent = ""; // Clear error if valid
+            }
+
+            alert('PEMESANAN BERHASIL!');
+            window.location.href = 'dashboardKonsumen.html'; // Redirect ke halaman dashboard
+        }
+
+        function goToDashboard() {
+            window.location.href = 'dashboardKonsumen.html'; // Arahkan ke halaman dashboard
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lihat Fasilitas</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        header {
+            background-color: #000000;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        table {
+            width: 90%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        table th, table td {
+            padding: 15px;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        table th {
+            background-color: #a40b0b;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        table tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        table td {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .button-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .button-container a {
+            text-decoration: none;
+            background-color: #a40b0b;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .button-container a:hover {
+            background-color: #00ff51;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Fasilitas Hotel</h1>
+    </header>
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Fasilitas</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Wi-Fi</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Kolam renang</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Gym</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="button-container">
+        <a href="./dashboardKonsumen.html">Kembali ke Dashboard Konsumen</a>
+    </div>
+</body>
+</html>

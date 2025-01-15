@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Pemesanan Konsumen</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #6e7cfc, #3f4d95);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #ffffff;
+            color: #333;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 15px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 18px;
+        }
+
+        table td {
+            font-size: 16px;
+        }
+
+        table button {
+            background-color: #f44336;
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        table button:hover {
+            background-color: #e53935;
+        }
+
+        table button:active {
+            background-color: #d32f2f;
+        }
+
+        .back-button {
+            background-color: #008CBA;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            width: 200px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .back-button:hover {
+            background-color: #007bb5;
+            transform: translateY(-3px);
+        }
+
+        .back-button:active {
+            background-color: #006f94;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Data Pemesanan Konsumen</h1>
+    </header>
+
+    <table>
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Konsumen</th>
+                <th>Jenis Kamar</th>
+                <th>Tanggal Pemesanan</th>
+                <th>Lama Menginap</th>
+            </tr>
+        </thead>
+        <tbody id="pemesananTableBody">
+            <!-- Data pemesanan konsumen akan ditampilkan di sini -->
+            <tr>
+                <td>1</td>
+                <td>Ifdzal</td>
+                <td>Deluxe</td>
+                <td>2024-01-10</td>
+                <td>3 Malam</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Maulana</td>
+                <td>Standard</td>
+                <td>2024-01-15</td>
+                <td>2 Malam</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Tombol Kembali ke Dashboard Admin -->
+    <button class="back-button" onclick="window.location.href='dashboardAdmin.html'">Kembali ke Dashboard</button>
+
+</body>
+</html>
